@@ -105,7 +105,7 @@ function scrollFunction1() {
       inline: 'center'
     });
 
-   }
+    }
 
 //validate form with javascript
 
