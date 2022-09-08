@@ -207,6 +207,9 @@ section.your-active-class .landing__container::after {
     opacity: 1;
     animation: rotate 5s linear 0s infinite forwards reverse;
 }
+.active-link {
+    background: rgb(184, 219, 29);
+  }
 
 /* Section Active Styles Keyframe Animations */
 @keyframes rotate {

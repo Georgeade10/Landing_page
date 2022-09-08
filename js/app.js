@@ -1,3 +1,8 @@
+
+
+
+
+
 /**
  * 
  * Manipulating the DOM exercise.
@@ -22,6 +27,8 @@
  * Define Global Variables
  * 
 */
+const sections = document.querySelectorAll("[data-nav]");
+const navList = document.querySelector("#navbar__list");
 
 
 /**
@@ -53,59 +60,63 @@
 
 // Build menu 
 
-const menu= `
 
-   <div class="topnav">
-    <li><a class="#active" href="#home">Home</a></li>
-    <li><a href="#section 1" onclick="scrollFunction1()">  section 1 </a></li>
-    <li><a href="#section 2"onclick="scrollFunction2()"> section 2 </a></li>
-    <li><a href="#section 3" onclick="scrollFunction3()"> section 3 </a></li>
-    <li><a href="#subscribe" onclick="scrollFunction4()"> subscribe </a></li>
-    
-    </div>
-      `
-   
-document.getElementById("navbar").insertAdjacentHTML("afterbegin", menu);
+
+
+function buildNav() {
+  sections.forEach((section) => {
+    const [item, link] = [
+      document.createElement("li"),
+      document.createElement("a"),
+    ];
+    const [title, target] = [
+      section.getAttribute("data-nav"),
+      section.getAttribute("id"),
+    ];
+    navList.appendChild(item);
+    item.appendChild(link);
+    link.textContent = title;
+    link.setAttribute("href", `#${target}`);
+    link.setAttribute("data-nav", `${target}`);
+    link.classList.add("menu__link");
+  });
+
+
+}
+document.addEventListener("DOMContentLoaded", buildNav);
 
 
 // Scroll to section on link click
-
-function scrollFunction1() {
-    const section1 = document.getElementById("section1");
-    section1.scrollIntoView({
-      block: 'start',
-      behavior: 'smooth',
-      inline: 'start'
-    });
+function scrollFunction(scroll) {
+  scroll.preventDefault();
+  if (scroll.target.dataset.nav) {
+    document
+      .getElementById(`${scroll.target.dataset.nav}`)
+    
+      .scrollIntoView({ behavior: "smooth", duration: 3000 });
   }
-  function scrollFunction2() {
-    const section2 = document.getElementById("section2"); 
-    section2.scrollIntoView({
-      block: 'end',
-      behavior: 'smooth',
-      inline: 'center'
-    });
+}
+navList.addEventListener("click", scrollFunction);
 
-  }
-  function scrollFunction3() {
-    const section3 = document.getElementById("section3"); 
-    section3.scrollIntoView({
-      block: 'end',
-      behavior: 'smooth',
-      inline: 'center'
-    });
 
-   }
 
-   function scrollFunction4() {
-    const section4 = document.getElementById("subscription"); 
-    section4.scrollIntoView({
-      block: 'end',
-      behavior: 'smooth',
-      inline: 'center'
-    });
+function setActive() {
+  sections.forEach((section) => {
+    const move = section.getBoundingClientRect();
 
+    const activeLink = navList.querySelector(`[data-nav=${section.id}]`);
+    if (move.top <= 150 && move.bottom >= 150) {
+      section.classList.add("your-active-class");
+      activeLink.classList.add("active-link");
     }
+     else {
+      section.classList.remove("your-active-class");
+      activeLink.classList.remove("active-link");
+    }
+  });
+}
+document.addEventListener("scroll", setActive);
+
 
 //validate form with javascript
 
@@ -127,17 +138,6 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
 
 // Set sections as active
 
-
-var sectionBox = document.getElementById("myDIV");
-var sections = sectionBox.querySelectorAll("section");
-
-for (var i = 0; i < sections.length; i++) {
-  sections[i].addEventListener("scroll", function() {
-  var current = document.getElementsByClassName("section.your-active-class");
-  current[0].className = current[0].className.replace(" section.your-active-class", "");
-  this.className += "section.your-active-class";
-  });
-}
 
 
 
