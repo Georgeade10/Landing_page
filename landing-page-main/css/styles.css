@@ -1,4 +1,15 @@
+/*
+ *
+ * CSS written based on SMACSS architecture.
+ * To learn more, visit: http://smacss.com/
+ * 
+ * For simplicity, no reset or normalize is added. 
+ * To learn more, visit: https://css-tricks.com/reboot-resets-reasoning/
+ *
+*/
 
+
+/* ---- Base Rules ---- */
 body {
     background: rgb(136,203,171);
     background: linear-gradient(0deg, rgba(136,203,171,1) 0%, rgba(0,13,60,1) 100%);
@@ -6,6 +17,7 @@ body {
     font-family: 'Merriweather', serif;
     color: #fff;
 }
+
 
 /* Typeography General*/
 h1 {
@@ -55,7 +67,8 @@ section {
 .navbar__menu ul {
     padding-left: 0;
     margin: 0;
-    text-align: right;
+    text-align: left;
+    background: #333;
 }
 
 .navbar__menu li {
@@ -67,14 +80,15 @@ section {
     padding: 1em;
     font-weight: bold;
     text-decoration: none;
-    color: #000;
+    color: rgb(96, 196, 118);
 }
 
 .navbar__menu .menu__link:hover {
-    background: #333;
-    color: #fff;
+    background: #fff;
+    color: rgb(96, 196, 118);
     transition: ease 0.3s all;
 }
+
 
 /* Header Styles */
 .page__header {
@@ -180,6 +194,10 @@ section:nth-of-type(3n + 1) .landing__container::after {
 
 /* ---- Theme State Rules ---- */
 /* Section Active Styles */
+
+
+
+
 /* Note: your-active-class class is applied through javascript. You should update the class here and in the index.html to what you set in your javascript file.  */
 section.your-active-class {
     background: rgb(0, 0, 0);
@@ -195,9 +213,11 @@ section.your-active-class .landing__container::after {
     opacity: 1;
     animation: rotate 5s linear 0s infinite forwards reverse;
 }
+
 .active-link {
-    background: rgb(184, 219, 29);
-  }
+    background: #fff;
+    color: rgb(96, 196, 118);
+}
 
 /* Section Active Styles Keyframe Animations */
 @keyframes rotate {
@@ -212,63 +232,3 @@ section.your-active-class .landing__container::after {
 		           rotate(-360deg);
 	}
 }
-.topnav {
-    overflow: hidden;
-    background-color:blue;
-  }
-  
-  .topnav a {
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-  }
-  .topnav a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-  
-  .topnav a.active {
-    background-color: #04AA6D;
-    color: white;
-  }
-
-  form {
-    border: 3px solid #f1f1f1;
-    font-family: Arial;
-    margin: 50px;
-  }
-  
-  .container {
-    padding: 20px;
-    background-color: blue;
-    color: black;
-
-  }
-  
-  input[type=text], input[type=submit] {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-  }
-  
-  input[type=checkbox] {
-    margin-top: 16px;
-  }
-  
-  input[type=submit] {
-    background-color: #04AA6D;
-    color: white;
-    border: none;
-  }
-  
-  input[type=submit]:hover {
-    opacity: 0.8;
-  }
-
-  

@@ -1,68 +1,22 @@
 
-
-
-
-
-/**
- * 
- * Manipulating the DOM exercise.
- * Exercise programmatically builds navigation,
- * scrolls to anchors from navigation,
- * and highlights section in viewport upon scrolling.
- * 
- * Dependencies: None
- * 
- * JS Version: ES2015/ES6
- * 
- * JS Standard: ESlint
- * 
-*/
-
-/**
- * Comments should be present at the beginning of each procedure and class.
- * Great to have comments before crucial code sections within the procedure.
-*/
-
 /**
  * Define Global Variables
- * 
-*/
+ * Sections stores all the data-nav (All Sections)
+ * navList stores all element in the navbar
+*/ 
 const sections = document.querySelectorAll("[data-nav]");
 const navList = document.querySelector("#navbar__list");
 
-
-/**
- * End Global Variables
- * Start Helper Functions
- * 
+/**Build menu
+ * forEach looped into all the sections
+ * @Item @link stores created li and a respectively
+ * @title @target stores data-nav and id
+ * @item is appended to navList
+ * @link is appended to item
+ * textContent is fetched from stored title value
+ * link attributes and a class list is added to every created nav element 
+ * function is called on DOMContentLoaded 
 */
-
-/**
- * End Helper Functions
- * Begin Main Functions
- * 
-*/
-
-// build the nav
-
-
-// Add class 'active' to section when near top of viewport
-
-
-// Scroll to anchor ID using scrollTO event
-
-
-/**
- * End Main Functions
- * Begin Events
- * 
-*/
-
-// Build menu 
-
-
-
-
 function buildNav() {
   sections.forEach((section) => {
     const [item, link] = [
@@ -80,26 +34,31 @@ function buildNav() {
     link.setAttribute("data-nav", `${target}`);
     link.classList.add("menu__link");
   });
-
-
 }
 document.addEventListener("DOMContentLoaded", buildNav);
 
-
-// Scroll to section on link click
+/* Scroll to section on link click
+* on click, scrollFunctions activates a smooth scroll view 
+to the target.dataset.nav
+*/
 function scrollFunction(scroll) {
   scroll.preventDefault();
   if (scroll.target.dataset.nav) {
     document
       .getElementById(`${scroll.target.dataset.nav}`)
-    
       .scrollIntoView({ behavior: "smooth", duration: 3000 });
   }
 }
 navList.addEventListener("click", scrollFunction);
 
+/* SetActive function for sections 
+* forEach function looped into every section
+* move stores with screen size/dimensions of each section.
+* if statement was employed to add the class list of your-active-class
+*  else was used to remove classlist
+* Function is called on scroll to the section
 
-
+*/
 function setActive() {
   sections.forEach((section) => {
     const move = section.getBoundingClientRect();
@@ -117,15 +76,18 @@ function setActive() {
 }
 document.addEventListener("scroll", setActive);
 
-
-//validate form with javascript
-
+/* validate form with javascript
+*function validates the email value
+*var x is the email value
+* atposition and dotposition are used to determine @ and . input value on email
+*function coded to return alert when email is valid and in valid 
+*/
 function validateForm()  
 {  
-var x=document.myform.email.value;  
-var name = document.myform.name.value;
-var atposition=x.indexOf("@");  
-var dotposition=x.lastIndexOf(".");  
+const x=document.myform.email.value;  
+const name = document.myform.name.value;
+const atposition=x.indexOf("@");  
+const dotposition=x.lastIndexOf(".");  
 if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){  
   alert("Please enter a valid e-mail address \n atpostion:"+atposition+"\n dotposition:"+dotposition);  
   return false;  
@@ -135,45 +97,3 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
   return true;
 }
 }
-
-// Set sections as active
-
-
-
-
-/*
-const sections = document.querySelectorAll('section');
-
-function sectionInViewPort(e) {
-    return (e.getBoundingClientRect().distance.top >= 0);
-}
-
-function AddActiveClass() {
-    for (s = 0; s <= sections.length; s++) {
-//if section is in view port add class "your-active class"
-        if (sectionInViewPort(sections[s])) {
-            sections[s].classList.add("section.your-active-class");
-            sections[s].classList.add("section.your-active-class .landing__container::before");
-            sections[s].classList.add("section.your-active-class .landing__container::after");
-//else remove it
-        }else {
-            sections[s].classList.remove("section.your-active-class");
-            sections[s].classList.remove("section.your-active-class .landing__container::before");
-            sections[s].classList.remove("section.your-active-class .landing__container::after");
-        }
-    }
-}
-document.addEventListener('scroll', AddActiveClass);
-
-
-
-/*const sections = document.querySelectorAll("section");
-
-sections.forEach(section => {
-   section.addEventListner("scroll", function () {
-    sections.forEach(sct => sct.classlist.remove('active'));
-    this.classlist.add('active');
-   });
-
-});
-*/
